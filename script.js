@@ -10,29 +10,74 @@ document.addEventListener("DOMContentLoaded", () => {
     const formSubjectDropdown = document.getElementById("taskSubjectDropdown");
     const taskListContainer = document.getElementById("taskList");
     const noTasksMessage = document.getElementById("noTasksMessage");
-    const deleteTaskBtn = document.getElementById("deleteTaskBtn"); // --- NEW --- Get the delete button
+    const deleteTaskBtn = document.getElementById("deleteTaskBtn");
+    const editTaskBtn = document.getElementById("editTaskBtn"); // --- NEW --- Get the edit button
+
+    // --- NEW: State variable to track if we are editing ---
+    let taskBeingEdited = null;
 
     // --- Modal Functions ---
-    // (No changes needed here)
+
+    // Function to open the modal
     function openModal() {
         taskModal.style.display = "block";
     }
 
+    // --- UPDATED: Function to close and reset the modal ---
     function closeModal() {
         taskModal.style.display = "none";
+        taskForm.reset(); // Clear all form fields
+        
+        // Reset modal to "Add Task" mode
+        taskBeingEdited = null;
+        document.querySelector('#taskModal h3').textContent = "Add a New Task";
+        document.querySelector('#taskForm button[type="submit"]').textContent = "Submit Task";
     }
 
     // --- Event Listeners for Modal ---
-    // (No changes needed here)
+    
+    // When the user clicks "Add task", open the modal (in "add" mode)
     openTaskModalBtn.addEventListener('click', openModal);
+
+    // When the user clicks on <span> (x), close the modal
     closeBtn.addEventListener('click', closeModal);
+
+    // When the user clicks anywhere outside of the modal, close it
     window.addEventListener('click', (event) => {
         if (event.target == taskModal) {
             closeModal();
         }
     });
 
-    // --- Task Form Submission ---
+    // --- NEW: Event Listener for Edit Button ---
+    editTaskBtn.addEventListener('click', () => {
+        const selectedCard = document.querySelector('.task-card.selected');
+        
+        if (!selectedCard) {
+            alert("Please select a task to edit first.");
+            return;
+        }
+
+        // Store the card we are editing
+        taskBeingEdited = selectedCard;
+
+        // Populate the form with data from the card's "dataset"
+        // (We will add this dataset in the submit function)
+        document.getElementById("taskSubjectDropdown").value = selectedCard.dataset.subject;
+        document.getElementById("taskNameInput").value = selectedCard.dataset.taskName;
+        document.getElementById("taskDueDateInput").value = selectedCard.dataset.dueDate;
+        document.getElementById("taskDescriptionInput").value = selectedCard.dataset.description;
+
+        // Change modal title and button text
+        document.querySelector('#taskModal h3').textContent = "Edit Task";
+        document.querySelector('#taskForm button[type="submit"]').textContent = "Update Task";
+        
+        // Open the modal
+        openModal();
+    });
+
+
+    // --- UPDATED: Task Form Submission (Handles BOTH Create and Update) ---
     taskForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -42,71 +87,92 @@ document.addEventListener("DOMContentLoaded", () => {
         const dueDate = document.getElementById("taskDueDateInput").value;
         const description = document.getElementById("taskDescriptionInput").value;
 
-        // 2. Hide the "no tasks" message
-        if (noTasksMessage) {
-            noTasksMessage.style.display = "none";
-        }
+        // --- NEW: Logic to check if we are Editing or Creating ---
+        if (taskBeingEdited) {
+            // --- UPDATE existing task ---
+            // 1. Update the card's dataset
+            taskBeingEdited.dataset.subject = subject;
+            taskBeingEdited.dataset.taskName = taskName;
+            taskBeingEdited.dataset.dueDate = dueDate;
+            taskBeingEdited.dataset.description = description;
 
-        // 3. Create the new task card element
-        const taskCard = document.createElement("div");
-        taskCard.className = "task-card"; // Apply CSS class
+            // 2. Update the card's inner HTML
+            taskBeingEdited.innerHTML = `
+                <h4>${taskName}</h4>
+                <div class="task-meta">
+                    <span><strong>Subject:</strong> ${subject}</span>
+                    <span><strong>Due:</strong> ${dueDate || 'N/A'}</span>
+                </div>
+                <p>${description || 'No description provided.'}</p>
+            `;
 
-        // 4. Populate the card with HTML
-        taskCard.innerHTML = `
-            <h4>${taskName}</h4>
-            <div class="task-meta">
-                <span><strong>Subject:</strong> ${subject}</span>
-                <span><strong>Due:</strong> ${dueDate || 'N/A'}</span>
-            </div>
-            <p>${description || 'No description provided.'}</p>
-        `;
+            // 3. Deselect the card after editing
+            taskBeingEdited.classList.remove('selected');
 
-        // --- NEW: Add click listener for selection ---
-        taskCard.addEventListener('click', () => {
-            // First, check if another card is already selected and remove it
-            const currentSelected = document.querySelector('.task-card.selected');
-            if (currentSelected && currentSelected !== taskCard) {
-                currentSelected.classList.remove('selected');
+        } else {
+            // --- CREATE new task (Original code) ---
+            // 2. Hide the "no tasks" message
+            if (noTasksMessage) {
+                noTasksMessage.style.display = "none";
             }
-            // Toggle the 'selected' class on the clicked card
-            taskCard.classList.toggle('selected');
-        });
-        // ---------------------------------------------
 
-        // 5. Add the new task card to the task list
-        taskListContainer.appendChild(taskCard);
+            // 3. Create the new task card element
+            const taskCard = document.createElement("div");
+            taskCard.className = "task-card"; // Apply CSS class
 
-        // 6. Reset the form and close the modal
-        taskForm.reset();
+            // --- NEW: Store the data in the dataset for editing ---
+            taskCard.dataset.subject = subject;
+            taskCard.dataset.taskName = taskName;
+            taskCard.dataset.dueDate = dueDate;
+            taskCard.dataset.description = description;
+
+            // 4. Populate the card with HTML
+            taskCard.innerHTML = `
+                <h4>${taskName}</h4>
+                <div class="task-meta">
+                    <span><strong>Subject:</strong> ${subject}</span>
+                    <span><strong>Due:</strong> ${dueDate || 'N/A'}</span>
+                </div>
+                <p>${description || 'No description provided.'}</p>
+            `;
+
+            // 5. Add click listener for selection
+            taskCard.addEventListener('click', () => {
+                const currentSelected = document.querySelector('.task-card.selected');
+                if (currentSelected && currentSelected !== taskCard) {
+                    currentSelected.classList.remove('selected');
+                }
+                taskCard.classList.toggle('selected');
+            });
+            
+            // 6. Add the new task card to the task list
+            taskListContainer.appendChild(taskCard);
+        }
+        
+        // 7. Reset the form and close the modal
+        // (This is now handled by closeModal)
         closeModal();
     });
 
-    // --- NEW: Event Listener for Delete Button ---
+    // --- Event Listener for Delete Button ---
+    // (No changes needed here)
     deleteTaskBtn.addEventListener('click', () => {
-        // 1. Find the card that is currently selected
         const selectedCard = document.querySelector('.task-card.selected');
-
-        // 2. If a selected card is found, remove it
         if (selectedCard) {
             selectedCard.remove();
-
-            // 3. Check if the task list is now empty
             if (taskListContainer.children.length === 0) {
                 noTasksMessage.style.display = "block";
             }
         } else {
-            // 4. If no card is selected, alert the user
             alert("Please click on a task to select it first.");
         }
     });
-    // -------------------------------------------
 
 });
 
 // --- Add Subject Function (Global) ---
 // (No changes needed here)
 function addSubject() {
-    // ... same as before
     const subject = prompt("Please enter the subject name:");
     if (subject && subject.trim() !== "") {
         const mainDropdown = document.getElementById("subjectDropdown");
