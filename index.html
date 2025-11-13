@@ -9,15 +9,19 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">LOGO</div>
-            <div class="header">Header</div>
+            <div class="logo-header">
+                <img src="image.png" alt="Logo" class="logo" />
+                <div class="header-text">Header</div>
+            </div>
         </header>
         <main>
             <nav class="sidebar">
-                <button>Add subject</button>
+                <button onclick="addSubject()">Add subject</button>
                 <button>Add task</button>
                 <button>Delete Task</button>
-                <div class="dropdown">Added subjects dropdown list</div>
+                <select class="dropdown" id="subjectDropdown">
+                    <option>Added subjects dropdown list</option>
+                </select>
             </nav>
             <section class="content">
                 <h3>Tasks:</h3>
@@ -29,5 +33,7 @@
             Footer
         </footer>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
