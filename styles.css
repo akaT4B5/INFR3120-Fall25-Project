@@ -4,27 +4,32 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
 .container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
+
 header {
-    background-color: #f0f0f0;
-    border-bottom: 2px solid #ccc;
+    background-color: #348A60;
+    border-bottom: 2px solid #1D4A33;
 }
+
 
 .logo-header {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 7px;
     justify-content: space-between;
 }
 
+
 .logo {
-    max-height: 60px; /* Adjust this value based on your logo size */
+    max-height: 60px; 
 }
+
 
 .header-text {
     flex-grow: 1;
@@ -32,29 +37,33 @@ header {
     margin-left: 20px;
 }
 
+
 main {
     display: flex;
     flex: 1;
 }
 
+
 .sidebar {
-    flex: 0 0 300px; /* (don't grow, don't shrink, 300px wide) */
+    flex: 0 0 300px; 
     padding: 20px;
-    background-color: #f7f7f7;
+    background-color: #E8FFF7;
     border-right: 2px solid #ccc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Spacing between elements in the sidebar */
+    gap: 15px; 
 }
+
 
 .sidebar button {
     width: 100%;
     padding: 10px;
-    border: 2px solid black;
-    background-color: white;
+    border: 2px solid #20382F;
+    background-color: #53A677;
     cursor: pointer;
 }
+
 
 /* Style for button groups */
 .button-group {
@@ -63,10 +72,12 @@ main {
     width: 100%; /* Make the group take full sidebar width */
 }
 
+
 .button-group button {
     flex: 1; /* Make buttons in the group share space equally */
     width: auto; /* Override the 100% width from .sidebar button */
 }
+
 
 /* Style for the "Subjects" label */
 .sidebar-label {
@@ -79,10 +90,12 @@ main {
     box-sizing: border-box; /* Include padding/border in width */
 }
 
+
 /* Ensure Add task button also takes full width */
 .full-width-button {
     width: 100%;
 }
+
 
 .dropdown {
     width: 100%;
@@ -90,10 +103,12 @@ main {
     box-sizing: border-box;
 }
 
+
 .dropdown option {
     padding: 5px;
     text-align: left;
 }
+
 
 .content {
     flex: 1;     /* take up all remaining space */
@@ -101,14 +116,17 @@ main {
     overflow-y: auto; /* Adds a scrollbar if tasks overflow */
 }
 
+
 footer {
     padding: 5px;
-    background-color: #f0f0f0;
+    background-color: #348A60;
     text-align: center;
-    border-top: .5px solid #ccc;
+    border-top: .5px solid #1D4A33;
 }
 
+
 /* --- Modal Styles --- */
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -122,8 +140,9 @@ footer {
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
 }
 
+
 .modal-content {
-    background-color: #fefefe;
+    background-color: #b1c8a8;
     margin: 10% auto; /* 10% from the top and centered */
     padding: 25px;
     border: 1px solid #888;
@@ -132,6 +151,7 @@ footer {
     border-radius: 8px;
     position: relative;
 }
+
 
 .close-btn {
     color: #aaa;
@@ -142,6 +162,7 @@ footer {
     font-weight: bold;
 }
 
+
 .close-btn:hover,
 .close-btn:focus {
     color: black;
@@ -149,7 +170,9 @@ footer {
     cursor: pointer;
 }
 
+
 /* --- Form Styles --- */
+
 
 #taskForm {
     display: flex;
@@ -157,10 +180,12 @@ footer {
     gap: 10px;
 }
 
+
 #taskForm label {
     font-weight: bold;
     margin-top: 5px;
 }
+
 
 #taskForm input[type="text"],
 #taskForm input[type="date"],
@@ -173,13 +198,15 @@ footer {
     box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
+
 #taskForm textarea {
     resize: vertical;
     min-height: 80px;
 }
 
+
 #taskForm button[type="submit"] {
-    background-color: #007bff;
+    background-color: #60e05a;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -189,18 +216,23 @@ footer {
     margin-top: 10px;
 }
 
+
 #taskForm button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #06e14b;
 }
 
 
+
+
 /* --- Task Card Styles --- */
+
 
 #taskList {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 
 .task-card h4 {
     margin-top: 0;
@@ -209,10 +241,12 @@ footer {
     color: #333;
 }
 
+
 .task-card p {
     margin: 5px 0;
     color: #555;
 }
+
 
 .task-card .task-meta {
     font-size: 0.9em;
@@ -220,6 +254,7 @@ footer {
     display: flex;
     justify-content: space-between;
 }
+
 
 /* Style for the task card itself */
 .task-card {
@@ -232,10 +267,11 @@ footer {
     transition: all 0.2s ease-in-out;
 }
 
+
 /* Style for when a task card is selected */
 .task-card.selected {
-    border-color: #0056b3; /* Darker blue border */
+    border-color: #005a0c; /* Darker blue border */
     background-color: #f0f8ff; /* Light blue background */
-    box-shadow: 0 4px 8px rgba(0,86,179,0.3); /* Stronger shadow */
+    box-shadow: 0 4px 8px rgba(54, 255, 111, 0.3); /* Stronger shadow */
     transform: scale(1.01); /* Slightly larger */
 }
