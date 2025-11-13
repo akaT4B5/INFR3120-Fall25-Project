@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const editTaskBtn = document.getElementById("editTaskBtn");
     const deleteSubjectBtn = document.getElementById("deleteSubjectBtn");
 
+// Variable to keep track of the task being edited
     let taskBeingEdited = null;
 
+// Functions to open and close the modal
     function openModal() {
         taskModal.style.display = "block";
     }
-
+// Close modal and reset form
     function closeModal() {
         taskModal.style.display = "none";
         taskForm.reset(); 
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('#taskForm button[type="submit"]').textContent = "Submit Task";
     }
 
+// Event listeners for various buttons and actions
     openTaskModalBtn.addEventListener('click', openModal);
 
     closeBtn.addEventListener('click', closeModal);
@@ -46,9 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please select a task to edit first.");
             return;
         }
-
+// Set the taskBeingEdited to the selected card
         taskBeingEdited = selectedCard;
 
+// Pre-fill the form with the selected task's data
         document.getElementById("taskSubjectDropdown").value = selectedCard.dataset.subject;
         document.getElementById("taskNameInput").value = selectedCard.dataset.taskName;
         document.getElementById("taskDueDateInput").value = selectedCard.dataset.dueDate;
@@ -56,8 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('#taskModal h3').textContent = "Edit Task";
         document.querySelector('#taskForm button[type="submit"]').textContent = "Update Task";
 
+// Open the modal for editing
         openModal();
     });
+
+    // Handle form submission for adding/editing tasks
     taskForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const subject = formSubjectDropdown.value;
@@ -65,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const dueDate = document.getElementById("taskDueDateInput").value;
         const description = document.getElementById("taskDescriptionInput").value;
 
+    
+// If editing an existing task, update its details
         if (taskBeingEdited) {
             taskBeingEdited.dataset.subject = subject;
             taskBeingEdited.dataset.taskName = taskName;
@@ -80,11 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             taskBeingEdited.classList.remove('selected');
 
-
+// Reset taskBeingEdited after updating
         } else {
             if (noTasksMessage) {
                 noTasksMessage.style.display = "none";
             }
+            // Create a new task card
             const taskCard = document.createElement("div");
             taskCard.className = "task-card";
             taskCard.dataset.subject = subject;
@@ -99,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <p>${description || 'No description provided.'}</p>
             `;
-
+// Add click event to select the task card
             taskCard.addEventListener('click', () => {
                 const currentSelected = document.querySelector('.task-card.selected');
                 if (currentSelected && currentSelected !== taskCard) {
@@ -113,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         closeModal();
     });
 
-
+// Delete task button functionality
     deleteTaskBtn.addEventListener('click', () => {
 
         const selectedCard = document.querySelector('.task-card.selected');
@@ -129,10 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     deleteSubjectBtn.addEventListener('click', () => {
         const selectedValue = mainSubjectDropdown.value;
+        // Validate selection
         if (!selectedValue || selectedValue === "") {
             alert("Please select a subject from the dropdown to delete.");
             return;
         }
+        // Confirm deletion with the user before proceeding
         if (confirm(`Are you sure you want to delete the subject "${selectedValue}"?`)) {
             const mainOptionToRemove = mainSubjectDropdown.querySelector(`option[value="${selectedValue}"]`);
             if (mainOptionToRemove) {
@@ -144,12 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
+// Filter tasks based on selected subject from dropdown
     mainSubjectDropdown.addEventListener('change', () => {
         const selectedSubject = mainSubjectDropdown.value;
         const allTasks = document.querySelectorAll('.task-card');
         let tasksFound = 0;
 
+// Show/hide tasks based on the selected subject
         allTasks.forEach(task => {
             if (selectedSubject === "" || task.dataset.subject === selectedSubject) {
                 task.style.display = "block"; 
@@ -158,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 task.style.display = "none"; 
             }
         });
-
+// Update no tasks message based on filtering result
         if (tasksFound > 0) {
             noTasksMessage.style.display = "none";
         } else {
@@ -173,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
+// Function to add a new subject to both dropdowns
 function addSubject() {
     const subject = prompt("Please enter the subject name:");
     if (subject && subject.trim() !== "") {

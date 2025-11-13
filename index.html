@@ -1,11 +1,14 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Header Section -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<!-- Body Section -->
 <body>
     <div class="container">
         <header>
@@ -15,11 +18,13 @@
             </div>
         </header>
         <main>
+            <!-- Sidebar Navigation -->
             <nav class="sidebar">
                 <div class="button-group">
                     <button onclick="addSubject()">Add Subject</button>
                     <button id="deleteSubjectBtn">Delete Subject</button>
                 </div>
+                <!-- Subject Dropdown -->
                 <select class="dropdown" id="subjectDropdown" size="8">
                     <option value="">Your subjects!</option>
                 </select>
@@ -29,6 +34,7 @@
                     <button id="deleteTaskBtn">Delete task</button>
                 </div>
             </nav>
+            <!-- Main Content Area -->
             <section class="content">
                 <h3>Tasks:</h3>
                 <div id="taskList">
@@ -36,15 +42,17 @@
                 <p id="noTasksMessage">No Tasks!</p>
             </section>
         </main>
+        <!-- Footer Section -->
         <footer>
             <p>&copy; 2025 Tabitha, Affan, Ghayas</p>
         </footer>
     </div>
 
-
+<!-- Task Portion (modal) -->
     <div id="taskModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
+            <!-- Task Form -->
             <h3>Add a New Task</h3>
             <form id="taskForm">
                 <label for="taskSubjectDropdown">Subject:</label>
@@ -52,7 +60,7 @@
                     <option value="">Select a subject...</option>
                     </select>
 
-
+<!-- Task Name, Due Date, Description Inputs -->
                 <label for="taskNameInput">Task name:</label>
                 <input type="text" id="taskNameInput" required>
 
@@ -70,7 +78,7 @@
         </div>
     </div>
 
-
+<!-- Link to JavaScript File -->
     <script src="script.js"></script>
 </body>
 </html>

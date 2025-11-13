@@ -1,3 +1,5 @@
+/* styles.css */ 
+/* General Styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -43,7 +45,7 @@ main {
     flex: 1;
 }
 
-
+/* Sidebar Styles */
 .sidebar {
     flex: 0 0 300px; 
     padding: 20px;
@@ -64,6 +66,7 @@ main {
     cursor: pointer;
 }
 
+/* Sidebar button hover effect */ 
 .button-group {
     display: flex;
     gap: 10px; 
@@ -76,6 +79,7 @@ main {
     width: auto;
 }
 
+/* Sidebar label styles */
 .sidebar-label {
     width: 100%;
     text-align: center;
@@ -90,7 +94,7 @@ main {
     width: 100%;
 }
 
-
+/* Dropdown styles */
 .dropdown {
     width: 100%;
     border: 1px solid #ccc;
@@ -110,7 +114,7 @@ main {
     overflow-y: auto;
 }
 
-
+/* Footer Styles */
 footer {
     padding: 5px;
     background-color: #348A60;
@@ -119,7 +123,7 @@ footer {
 }
 
 
-
+/* Modal Styles */
 .modal {
     display: none; 
     position: fixed; 
@@ -144,7 +148,7 @@ footer {
     position: relative;
 }
 
-
+/* Close Button Styles */
 .close-btn {
     color: #aaa;
     position: absolute;
@@ -162,7 +166,7 @@ footer {
     cursor: pointer;
 }
 
-
+/* Form Styles */
 #taskForm {
     display: flex;
     flex-direction: column;
@@ -175,7 +179,7 @@ footer {
     margin-top: 5px;
 }
 
-
+/* Input Styles */
 #taskForm input[type="text"],
 #taskForm input[type="date"],
 #taskForm select,
@@ -210,7 +214,7 @@ footer {
     background-color: #06e14b;
 }
 
-
+/* Task List Styles */
 #taskList {
     display: flex;
     flex-direction: column;
@@ -251,7 +255,7 @@ footer {
 }
 
 
-
+/* Task Card Selected Styles */
 .task-card.selected {
     border-color: #005a0c; 
     background-color: #f0f8ff; 
