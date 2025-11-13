@@ -64,34 +64,28 @@ main {
     cursor: pointer;
 }
 
-
-/* Style for button groups */
 .button-group {
     display: flex;
-    gap: 10px; /* Space between buttons in the group */
-    width: 100%; /* Make the group take full sidebar width */
+    gap: 10px; 
+    width: 100%;
 }
 
 
 .button-group button {
-    flex: 1; /* Make buttons in the group share space equally */
-    width: auto; /* Override the 100% width from .sidebar button */
+    flex: 1;
+    width: auto;
 }
 
-
-/* Style for the "Subjects" label */
 .sidebar-label {
-    width: 100%; /* Take full width */
+    width: 100%;
     text-align: center;
     padding: 10px;
-    background-color: #e0e0e0; /* A slightly darker background */
+    background-color: #e0e0e0;
     border: 1px solid #ccc;
     font-weight: bold;
-    box-sizing: border-box; /* Include padding/border in width */
+    box-sizing: border-box;
 }
 
-
-/* Ensure Add task button also takes full width */
 .full-width-button {
     width: 100%;
 }
@@ -111,9 +105,9 @@ main {
 
 
 .content {
-    flex: 1;     /* take up all remaining space */
+    flex: 1;
     padding: 20px;
-    overflow-y: auto; /* Adds a scrollbar if tasks overflow */
+    overflow-y: auto;
 }
 
 
@@ -125,29 +119,27 @@ footer {
 }
 
 
-/* --- Modal Styles --- */
-
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5);
 }
 
 
 .modal-content {
     background-color: #b1c8a8;
-    margin: 10% auto; /* 10% from the top and centered */
+    margin: 10% auto; 
     padding: 25px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 500px; /* Max width */
+    max-width: 500px;
     border-radius: 8px;
     position: relative;
 }
@@ -171,9 +163,6 @@ footer {
 }
 
 
-/* --- Form Styles --- */
-
-
 #taskForm {
     display: flex;
     flex-direction: column;
@@ -195,7 +184,7 @@ footer {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    box-sizing: border-box; 
 }
 
 
@@ -220,11 +209,6 @@ footer {
 #taskForm button[type="submit"]:hover {
     background-color: #06e14b;
 }
-
-
-
-
-/* --- Task Card Styles --- */
 
 
 #taskList {
@@ -256,7 +240,6 @@ footer {
 }
 
 
-/* Style for the task card itself */
 .task-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -268,10 +251,10 @@ footer {
 }
 
 
-/* Style for when a task card is selected */
+
 .task-card.selected {
-    border-color: #005a0c; /* Darker blue border */
-    background-color: #f0f8ff; /* Light blue background */
-    box-shadow: 0 4px 8px rgba(54, 255, 111, 0.3); /* Stronger shadow */
-    transform: scale(1.01); /* Slightly larger */
+    border-color: #005a0c; 
+    background-color: #f0f8ff; 
+    box-shadow: 0 4px 8px rgba(54, 255, 111, 0.3); 
+    transform: scale(1.01); 
 }
