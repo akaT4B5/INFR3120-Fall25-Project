@@ -68,10 +68,10 @@ main {
 }
 
 footer {
-    padding: 20px;
+    padding: 5px;
     background-color: #f0f0f0;
     text-align: center;
-    border-top: 2px solid #ccc;
+    border-top: .5px solid #ccc;
 }
 
 /* --- New Modal Styles --- */
