@@ -168,13 +168,6 @@ footer {
     gap: 15px;
 }
 
-.task-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
 
 .task-card h4 {
     margin-top: 0;
@@ -193,4 +186,23 @@ footer {
     color: #777;
     display: flex;
     justify-content: space-between;
+}
+
+/* --- Additions for styles.css --- */
+
+/* Add this to your existing .task-card rule */
+.task-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer; /* <-- ADD THIS: Shows the card is clickable */
+    transition: border-color 0.2s, box-shadow 0.2s; /* <-- ADD THIS: Smooths selection */
+}
+
+/* Add this new class definition */
+.task-card.selected {
+    border-color: #007bff; /* Highlight color */
+    box-shadow: 0 3px 6px rgba(0,123,255,0.25); /* A slight blue shadow */
 }
