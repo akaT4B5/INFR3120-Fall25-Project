@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management Layout</title>
+    <title>To-Do Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,13 +16,18 @@
         </header>
         <main>
             <nav class="sidebar">
-                <button onclick="addSubject()">Add subject</button>
-                <button id="openTaskModalBtn">Add task</button>
-                <button id="editTaskBtn">Edit Task</button>
-                <button id="deleteTaskBtn">Delete Task</button>
-                <select class="dropdown" id="subjectDropdown">
-                    <option value="">Subjects!</option>
+                <div class="button-group">
+                    <button onclick="addSubject()">Add Subject</button>
+                    <button id="deleteSubjectBtn">Delete Subject</button>
+                </div>
+                <select class="dropdown" id="subjectDropdown" size="8">
+                    <option value="">Your subjects!</option>
                 </select>
+                <button id="openTaskModalBtn" class="full-width-button">Add task</button>
+                <div class="button-group">
+                    <button id="editTaskBtn">Edit task</button>
+                    <button id="deleteTaskBtn">Delete task</button>
+                </div>
             </nav>
             <section class="content">
                 <h3>Tasks:</h3>

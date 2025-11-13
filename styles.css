@@ -23,7 +23,7 @@ header {
 }
 
 .logo {
-    max-height: 90px; /* Adjust this value based on your logo size */
+    max-height: 60px; /* Adjust this value based on your logo size */
 }
 
 .header-text {
@@ -38,14 +38,14 @@ main {
 }
 
 .sidebar {
-    flex: 1;
+    flex: 0 0 300px; /* (don't grow, don't shrink, 300px wide) */
     padding: 20px;
     background-color: #f7f7f7;
     border-right: 2px solid #ccc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Spacing between elements in the sidebar */
 }
 
 .sidebar button {
@@ -56,15 +56,49 @@ main {
     cursor: pointer;
 }
 
+/* Style for button groups */
+.button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons in the group */
+    width: 100%; /* Make the group take full sidebar width */
+}
+
+.button-group button {
+    flex: 1; /* Make buttons in the group share space equally */
+    width: auto; /* Override the 100% width from .sidebar button */
+}
+
+/* Style for the "Subjects" label */
+.sidebar-label {
+    width: 100%; /* Take full width */
+    text-align: center;
+    padding: 10px;
+    background-color: #e0e0e0; /* A slightly darker background */
+    border: 1px solid #ccc;
+    font-weight: bold;
+    box-sizing: border-box; /* Include padding/border in width */
+}
+
+/* Ensure Add task button also takes full width */
+.full-width-button {
+    width: 100%;
+}
+
 .dropdown {
     width: 100%;
-    padding: 10px;
-    text-align: center;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.dropdown option {
+    padding: 5px;
+    text-align: left;
 }
 
 .content {
-    flex: 3;
+    flex: 1;     /* take up all remaining space */
     padding: 20px;
+    overflow-y: auto; /* Adds a scrollbar if tasks overflow */
 }
 
 footer {
@@ -74,7 +108,7 @@ footer {
     border-top: .5px solid #ccc;
 }
 
-/* --- New Modal Styles --- */
+/* --- Modal Styles --- */
 
 .modal {
     display: none; /* Hidden by default */
@@ -115,7 +149,7 @@ footer {
     cursor: pointer;
 }
 
-/* --- New Form Styles --- */
+/* --- Form Styles --- */
 
 #taskForm {
     display: flex;
@@ -160,14 +194,13 @@ footer {
 }
 
 
-/* --- New Task Card Styles --- */
+/* --- Task Card Styles --- */
 
 #taskList {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-
 
 .task-card h4 {
     margin-top: 0;
@@ -188,21 +221,21 @@ footer {
     justify-content: space-between;
 }
 
-/* --- Additions for styles.css --- */
-
-/* Add this to your existing .task-card rule */
+/* Style for the task card itself */
 .task-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    cursor: pointer; /* <-- ADD THIS: Shows the card is clickable */
-    transition: border-color 0.2s, box-shadow 0.2s; /* <-- ADD THIS: Smooths selection */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
-/* Add this new class definition */
+/* Style for when a task card is selected */
 .task-card.selected {
-    border-color: #007bff; /* Highlight color */
-    box-shadow: 0 3px 6px rgba(0,123,255,0.25); /* A slight blue shadow */
+    border-color: #0056b3; /* Darker blue border */
+    background-color: #f0f8ff; /* Light blue background */
+    box-shadow: 0 4px 8px rgba(0,86,179,0.3); /* Stronger shadow */
+    transform: scale(1.01); /* Slightly larger */
 }
