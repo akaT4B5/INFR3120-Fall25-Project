@@ -17,21 +17,46 @@
         <main>
             <nav class="sidebar">
                 <button onclick="addSubject()">Add subject</button>
-                <button>Add task</button>
+                <button id="openTaskModalBtn">Add task</button>
                 <button>Delete Task</button>
                 <select class="dropdown" id="subjectDropdown">
-                    <option>Added subjects dropdown list</option>
+                    <option value="">Added subjects dropdown list</option>
                 </select>
             </nav>
             <section class="content">
                 <h3>Tasks:</h3>
-                <p>(added tasks)</p>
-                <p>*if no tasks, display “no tasks”</p>
+                <div id="taskList">
+                    </div>
+                <p id="noTasksMessage">*if no tasks, display “no tasks”</p>
             </section>
         </main>
         <footer>
             Footer
         </footer>
+    </div>
+
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Add a New Task</h3>
+            <form id="taskForm">
+                <label for="taskSubjectDropdown">Subject:</label>
+                <select id="taskSubjectDropdown" required>
+                    <option value="">Select a subject...</option>
+                    </select>
+
+                <label for="taskNameInput">Task name:</label>
+                <input type="text" id="taskNameInput" required>
+
+                <label for="taskDueDateInput">Due date:</label>
+                <input type="date" id="taskDueDateInput">
+
+                <label for="taskDescriptionInput">Description:</label>
+                <textarea id="taskDescriptionInput" rows="4"></textarea>
+
+                <button type="submit">Submit Task</button>
+            </form>
+        </div>
     </div>
 
     <script src="script.js"></script>
