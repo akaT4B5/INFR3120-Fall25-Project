@@ -201,4 +201,8 @@ function addSubject() {
         formOption.value = subject;
         formDropdown.add(formOption);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c8b90fc (first commit)
