@@ -2,7 +2,7 @@
   "name": "infr3120-fall25-project-main",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --ext js,html,css server.js",
