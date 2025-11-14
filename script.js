@@ -203,6 +203,3 @@ function addSubject() {
     }
 <<<<<<< HEAD
 }
-=======
-}
->>>>>>> c8b90fc (first commit)
