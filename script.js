@@ -201,5 +201,4 @@ function addSubject() {
         formOption.value = subject;
         formDropdown.add(formOption);
     }
-
 }
