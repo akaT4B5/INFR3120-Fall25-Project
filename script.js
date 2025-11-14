@@ -264,6 +264,9 @@ function addSubject() {
     let subject = prompt("Please enter the subject name (max 25 characters):");
     if (!subject) return;
 
+function addSubject() {
+    let subject = prompt("Please enter the subject name (max 25 characters):");
+    if (!subject) return;
     subject = subject.trim();
     if (subject.length === 0) {
         alert("Subject cannot be empty.");
@@ -290,4 +293,23 @@ function addSubject() {
     // Save subject
     savedSubjects.push(subject);
     saveAll();
+    }
+    if (subject.length > 25) {
+        alert("Subject must be 25 characters or fewer.");
+        return;
+    }
+    if (subject) {
+        const mainDropdown = document.getElementById("subjectDropdown");
+        const formDropdown = document.getElementById("taskSubjectDropdown");
+        const mainOption = document.createElement("option");
+        mainOption.text = subject;
+        mainOption.value = subject;
+        mainDropdown.add(mainOption);
+        const formOption = document.createElement("option");
+        formOption.text = subject;
+        formOption.value = subject;
+        formDropdown.add(formOption);
+    }
+}
+
 }
