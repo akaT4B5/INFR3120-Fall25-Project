@@ -1,3 +1,7 @@
+// Declare global arrays so they exist before DOMContentLoaded
+let savedSubjects = [];
+let savedTasks = [];
+
 // Wait for the DOM to be fully loaded before running script
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -241,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
 
 // GLOBAL addSubject() function — now safe
 function addSubject() {
