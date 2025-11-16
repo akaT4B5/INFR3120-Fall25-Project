@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // Load saved data from localStorage
-    let savedSubjects = JSON.parse(localStorage.getItem("subjects") || "[]");
-    let savedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    savedSubjects = JSON.parse(localStorage.getItem("subjects") || "[]");
+    savedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
     function saveAll() {
         localStorage.setItem("subjects", JSON.stringify(savedSubjects));
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editTaskBtn = document.getElementById("editTaskBtn");
     const deleteSubjectBtn = document.getElementById("deleteSubjectBtn");
 
-    // Load saved subjects
+    // Load saved subjects into dropdowns
     savedSubjects.forEach(sub => {
         const opt1 = document.createElement("option");
         opt1.value = opt1.textContent = sub;
@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
         formSubjectDropdown.add(opt2);
     });
 
-    // Load saved tasks
-    savedTasks.forEach(t => {
+    // Helper to create task cards
+    function createTaskCard(t) {
         const taskCard = document.createElement("div");
         taskCard.className = "task-card";
 
@@ -61,13 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
             taskCard.classList.toggle("selected");
         });
 
-        taskListContainer.appendChild(taskCard);
+        return taskCard;
+    }
+
+    // Load saved tasks
+    savedTasks.forEach(t => {
+        taskListContainer.appendChild(createTaskCard(t));
     });
 
-    // Variable to keep track of the task being edited
+    // Track which task is being edited
     let taskBeingEdited = null;
 
-    // Functions to open and close the modal
+    // Open/Close modal
     function openModal() {
         taskModal.style.display = "block";
     }
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         taskBeingEdited = selectedCard;
 
-        document.getElementById("taskSubjectDropdown").value = selectedCard.dataset.subject;
+        formSubjectDropdown.value = selectedCard.dataset.subject;
         document.getElementById("taskNameInput").value = selectedCard.dataset.taskName;
         document.getElementById("taskDueDateInput").value = selectedCard.dataset.dueDate;
         document.getElementById("taskDescriptionInput").value = selectedCard.dataset.description;
@@ -123,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const oldSubject = taskBeingEdited.dataset.subject;
             const oldName = taskBeingEdited.dataset.taskName;
 
+            // Update card visuals
             taskBeingEdited.dataset.subject = subject;
             taskBeingEdited.dataset.taskName = taskName;
             taskBeingEdited.dataset.dueDate = dueDate;
@@ -139,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             taskBeingEdited.classList.remove("selected");
 
-            // Update saved task
+            // Update localStorage
             const index = savedTasks.findIndex(t =>
                 t.subject === oldSubject && t.taskName === oldName
             );
@@ -151,37 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } else {
             // ADD NEW TASK
-            if (noTasksMessage) noTasksMessage.style.display = "none";
+            noTasksMessage.style.display = "none";
 
-            const taskCard = document.createElement("div");
-            taskCard.className = "task-card";
-
-            taskCard.dataset.subject = subject;
-            taskCard.dataset.taskName = taskName;
-            taskCard.dataset.dueDate = dueDate;
-            taskCard.dataset.description = description;
-
-            taskCard.innerHTML = `
-                <h4>${taskName}</h4>
-                <div class="task-meta">
-                    <span><strong>Subject:</strong> ${subject}</span>
-                    <span><strong>Due:</strong> ${dueDate || 'N/A'}</span>
-                </div>
-                <p>${description || 'No description provided.'}</p>
-            `;
-
-            taskCard.addEventListener('click', () => {
-                const currentSelected = document.querySelector('.task-card.selected');
-                if (currentSelected && currentSelected !== taskCard) {
-                    currentSelected.classList.remove('selected');
-                }
-                taskCard.classList.toggle('selected');
-            });
-
-            taskListContainer.appendChild(taskCard);
-
-            savedTasks.push({ subject, taskName, dueDate, description });
+            const newTask = { subject, taskName, dueDate, description };
+            savedTasks.push(newTask);
             saveAll();
+
+            taskListContainer.appendChild(createTaskCard(newTask));
         }
 
         closeModal();
@@ -192,10 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedCard = document.querySelector('.task-card.selected');
 
         if (selectedCard) {
-            // Remove from UI
             selectedCard.remove();
 
-            // Remove from localStorage
             savedTasks = savedTasks.filter(t =>
                 !(t.subject === selectedCard.dataset.subject &&
                   t.taskName === selectedCard.dataset.taskName)
@@ -220,14 +200,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (confirm(`Delete subject "${selectedValue}"?`)) {
-            const opt1 = mainSubjectDropdown.querySelector(`option[value="${selectedValue}"]`);
-            if (opt1) opt1.remove();
+            // Remove from dropdowns
+            mainSubjectDropdown.querySelector(`option[value="${selectedValue}"]`)?.remove();
+            formSubjectDropdown.querySelector(`option[value="${selectedValue}"]`)?.remove();
 
-            const opt2 = formSubjectDropdown.querySelector(`option[value="${selectedValue}"]`);
-            if (opt2) opt2.remove();
-
+            // Remove from memory
             savedSubjects = savedSubjects.filter(s => s !== selectedValue);
             savedTasks = savedTasks.filter(t => t.subject !== selectedValue);
+
+            // Refresh task list visually
+            document.querySelectorAll('.task-card').forEach(card => {
+                if (card.dataset.subject === selectedValue) {
+                    card.remove();
+                }
+            });
+
             saveAll();
         }
     });
@@ -247,19 +234,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        if (tasksFound > 0) {
-            noTasksMessage.style.display = "none";
-        } else {
-            noTasksMessage.style.display = "block";
-            noTasksMessage.textContent = selectedSubject === ""
-                ? "No Tasks!"
-                : `No tasks for "${selectedSubject}"`;
-        }
+        noTasksMessage.style.display = tasksFound > 0 ? "none" : "block";
+        noTasksMessage.textContent = selectedSubject === ""
+            ? "No Tasks!"
+            : `No tasks for "${selectedSubject}"`;
     });
 
 });
 
-// Function to add a new subject
+// GLOBAL addSubject() function — now safe
 function addSubject() {
     let subject = prompt("Please enter the subject name (max 25 characters):");
     if (!subject) return;
@@ -287,7 +270,6 @@ function addSubject() {
     formOption.value = subject;
     formDropdown.add(formOption);
 
-    // Save subject
     savedSubjects.push(subject);
-    saveAll();
+    localStorage.setItem("subjects", JSON.stringify(savedSubjects));
 }
