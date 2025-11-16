@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Serve ALL files in this folder
 app.use(express.static(__dirname));
 
 app.get("/", (_req, res) => {
@@ -11,5 +12,5 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
