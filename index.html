@@ -1,14 +1,12 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Header Section -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<!-- Body Section -->
+
 <body>
     <div class="container">
         <header>
@@ -17,6 +15,7 @@
                 <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
             </div>
         </header>
+
         <main>
             <!-- Sidebar Navigation -->
             <nav class="sidebar">
@@ -24,60 +23,56 @@
                     <button onclick="addSubject()">Add Subject</button>
                     <button id="deleteSubjectBtn">Delete Subject</button>
                 </div>
+
                 <!-- Subject Dropdown -->
                 <select class="dropdown" id="subjectDropdown" size="8">
                     <option value="">Your subjects!</option>
                 </select>
+
                 <button id="openTaskModalBtn" class="full-width-button">Add task</button>
+
                 <div class="button-group">
                     <button id="editTaskBtn">Edit task</button>
                     <button id="deleteTaskBtn">Delete task</button>
                 </div>
             </nav>
+
             <!-- Main Content Area -->
             <section class="content">
                 <h3>Tasks:</h3>
-                <div id="taskList">
-                    </div>
+                <div id="taskList"></div>
                 <p id="noTasksMessage">No Tasks!</p>
             </section>
         </main>
-        <!-- Footer Section -->
+
         <footer>
             <p>&copy; 2025 Tabitha, Affan, Ghayas</p>
         </footer>
     </div>
 
-<!-- Task Portion (modal) -->
+    <!-- Task Modal -->
     <div id="taskModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <!-- Task Form -->
+
             <h3>Add a New Task</h3>
+
             <form id="taskForm">
+
                 <label for="taskSubjectDropdown">Subject:</label>
                 <select id="taskSubjectDropdown" required>
                     <option value="">Select a subject...</option>
-                    </select>
+                </select>
 
-<!-- Task Name, Due Date, Description Inputs -->
                 <label for="taskNameInput">Task name:</label>
                 <input type="text" id="taskNameInput" required maxlength="35">
-
 
                 <label for="taskDueDateInput">Due date:</label>
                 <input type="date" id="taskDueDateInput">
 
-
                 <label for="taskDescriptionInput">Description:</label>
                 <textarea id="taskDescriptionInput" rows="4" maxlength="200"></textarea>
 
-
                 <button type="submit">Submit Task</button>
             </form>
-        </div>
-    </div>
-    <!-- Link to JavaScript File -->
-    <script src="script.js"></script>
-  </body>
-</html>
+        </d
