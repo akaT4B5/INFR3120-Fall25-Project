@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Get references to all the necessary elements
-    const taskModal = document.getElementById("taskModal");
+    const taskModal = document.getElementById("taskModal"); 
     const openTaskModalBtn = document.getElementById("openTaskModalBtn");
     const closeBtn = document.querySelector(".close-btn");
     const taskForm = document.getElementById("taskForm");
