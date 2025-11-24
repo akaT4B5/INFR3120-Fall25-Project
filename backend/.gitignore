@@ -1,23 +1,23 @@
-# Dependencies - This includes nodemon and all other libraries
+# 1. Dependencies (The 86+ files)
 node_modules/
 
-# Environment Variables - CRITICAL: Contains your MongoDB Password
+# 2. Security (Your Passwords/Secrets)
 .env
 
-# Logs
+# 3. Logs (Error reports)
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 logs
 *.log
-npm-debug.log
 
-# Operating System Files
+# 4. Operating System Junk
 .DS_Store
 Thumbs.db
 
-# Optional: Ignore VS Code settings if you have them
+# 5. IDE Settings (Optional, keeps your personal settings private)
 .vscode/
+.idea/
 
 # Optional: Ignore nodemon config if it contains secrets (rare, but possible)
 nodemon.json

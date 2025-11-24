@@ -1,3 +1,5 @@
+
+const authRoutes = require('./routes/auth');
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -9,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json()); // Allows us to parse JSON bodies from frontend
+app.use('/api/auth', authRoutes);
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI; 
