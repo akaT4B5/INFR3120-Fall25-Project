@@ -238,3 +238,47 @@ footer {
     box-shadow: 0 4px 8px rgba(54, 255, 111, 0.3); 
     transform: scale(1.01); 
 }
+
+/* --- Auth Navigation Styles --- */
+.logo-header {
+    /* Update this existing class to spread items apart */
+    justify-content: space-between; 
+}
+
+.auth-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-right: 20px;
+}
+
+.nav-btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #53A677;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #1D4A33;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background-color: #348A60;
+}
+
+.nav-btn.logout {
+    background-color: #d9534f; /* Red for logout */
+    border-color: #d43f3a;
+}
+
+.nav-btn.logout:hover {
+    background-color: #c9302c;
+}
+
+#userGreeting {
+    color: #E8FFF7;
+    font-weight: bold;
+    margin-right: 10px;
+}

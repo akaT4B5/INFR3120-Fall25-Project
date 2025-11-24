@@ -9,12 +9,26 @@
 
 <body>
     <div class="container">
-        <header>
-            <div class="logo-header">
-                <img src="image.png" alt="Logo" class="logo" />
-                <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
+<header>
+    <div class="logo-header">
+        <div style="display: flex; align-items: center;">
+            <img src="image.png" alt="Logo" class="logo" />
+            <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
+        </div>
+        
+        <nav class="auth-nav">
+            <div id="loggedOutLinks">
+                <a href="login.html" class="nav-btn">Login</a>
+                <a href="register.html" class="nav-btn">Register</a>
             </div>
-        </header>
+
+            <div id="loggedInLinks" style="display: none;">
+                <span id="userGreeting"></span>
+                <button id="logoutBtn" class="nav-btn logout">Logout</button>
+            </div>
+        </nav>
+    </div>
+</header>
 
         <main>
             <!-- Sidebar Navigation -->
