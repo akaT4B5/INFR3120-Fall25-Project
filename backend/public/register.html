@@ -5,68 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - To-Do Tracker</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Specific styles for auth pages to center the box */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #E8FFF7;
-        }
-        .auth-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #1D4A33;
-        }
-        .auth-container h2 {
-            color: #1D4A33;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding doesn't break width */
-        }
-        .btn-auth {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #53A677;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .btn-auth:hover {
-            background-color: #348A60;
-        }
-        .auth-link {
-            display: block;
-            text-align: center;
-            margin-top: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
+    </head>
+<body class="auth-body"> 
+
+    <header>
+        <div class="logo-header">
+            <div style="display: flex; align-items: center;">
+                <img src="image.png" alt="Logo" class="logo" />
+                <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
+            </div>
+            <nav class="auth-nav">
+                 <a href="login.html" class="nav-btn">Login</a>
+            </nav>
+        </div>
+    </header>
 
     <div class="auth-container">
         <h2>Create Account</h2>
@@ -85,10 +37,10 @@
             </div>
             <button type="submit" class="btn-auth">Register</button>
         </form>
-        <a href="login.html" class="auth-link">Already have an account? Login</a>
     </div>
 
     <script>
+        const API_URL = '/api/auth/register'; 
         const registerForm = document.getElementById('registerForm');
 
         registerForm.addEventListener('submit', async (e) => {
@@ -99,12 +51,9 @@
             const password = document.getElementById('password').value;
 
             try {
-                // Send data to your backend
-                const response = await fetch('http://localhost:5000/api/auth/register', {
+                const response = await fetch(API_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ fullName, email, password })
                 });
 
