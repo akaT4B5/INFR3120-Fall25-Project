@@ -2,7 +2,7 @@
 // GLOBAL CONFIGURATION & HELPER FUNCTIONS
 // ==========================================
 
-const API_URL = 'http://localhost:5000/api/tasks';
+const API_URL = '/api/tasks';
 
 // Function to add a new subject (Called by the HTML button)
 function addSubject() {
