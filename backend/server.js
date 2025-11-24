@@ -2,35 +2,34 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path'); 
+const path = require('path');
 
-// --- IMPORT ROUTES ---
+// 1. IMPORT ROUTES
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks'); 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// 2. MIDDLEWARE
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Allows parsing JSON data from frontend
 
-// MongoDB Connection
+// 3. SERVE FRONTEND FILES (HTML, CSS, JS)
+// This tells the server: "Look inside the 'public' folder for index.html"
+app.use(express.static(path.join(__dirname, 'public')));
+
+// 4. MONGODB CONNECTION
 const uri = process.env.MONGO_URI; 
 mongoose.connect(uri)
     .then(() => console.log("✅ MongoDB Connection Established"))
     .catch(err => console.log("❌ MongoDB Connection Error:", err));
 
-// --- USE ROUTES ---
+// 5. CONNECT API ROUTES
 app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes); // <--- 2. THIS LINE WAS LIKELY MISSING
+app.use('/api/tasks', taskRoutes); 
 
-// Base Route
-app.get('/', (req, res) => {
-    res.send('Server is up and running');
-});
-
-// Start Server
+// 6. START SERVER
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
