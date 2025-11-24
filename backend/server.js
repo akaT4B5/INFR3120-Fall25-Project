@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const taskRoutes = require('./routes/tasks');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json()); // Allows us to parse JSON bodies from frontend
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI; 
