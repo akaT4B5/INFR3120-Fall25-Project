@@ -304,3 +304,82 @@ footer {
 .btn-auth:hover {
     background-color: #348A60;
 }
+
+/* --- New Auth Page Styling (Moved from HTML) --- */
+
+/* Base body style for Auth pages: centers content vertically/horizontally */
+.auth-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+    background-color: #E8FFF7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Auth Container (The centralized, rounded box) */
+.centered-auth-container {
+    background-color: white;
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.centered-auth-container h2 {
+    color: #1D4A33;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Form Group overrides for the centralized look */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    text-align: left;
+    font-weight: bold;
+}
+.form-group input {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Footer Link and Button Styles */
+.btn-auth {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+.footer-link {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+.footer-link a {
+    color: #1D4A33;
+    text-decoration: none;
+    font-weight: bold;
+}
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer positioning for Auth pages (overrides standard footer placement) */
+.auth-body footer {
+    margin-top: auto; 
+    width: 100%;
+    padding: 5px;
+    background-color: #348A60;
+    text-align: center;
+    border-top: .5px solid #1D4A33;
+}
