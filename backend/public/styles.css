@@ -360,42 +360,64 @@ footer {
 /* ====== MOBILE FIX ====== */
 @media (max-width: 768px) {
 
-    /* Make the layout vertical instead of side-by-side */
-    .container{
+    /* Make the main container vertical*/
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
 
     /* Left Controls bar */
-    .controls {
-        width: 90%;    
-        margin: 20px;       
+    .sidebar {
+        width: 95%;    
+        margin: 0 auto;   
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;    
     }
 
-    /* Make buttons one by one in a column */
-    .contorls button,
-    .controls select {
+    /*  buttons  */
+    .sidebar button,
+    .sidebar .button-group button,
+    .sidebar select {
         width: 100%;
-        margin: 10px;
-        display: block;
+        margin: 10px 0;
+        font-size: 16px;
     }
 
-    /* task container comes here */
-    .task-container {
+
+    /* Dropdown full width */
+    #subjectDropdown {
+        width: 100% !important;
+        height: auto;
+    }
+
+    /* task content moves below the side bar */
+    .content {
         width: 95%;
         margin-top: 20px;
     }
 
-    /* top header so it doesnt overflow */
-    header, nav {
+    /* top header  */
+    header .logo-header {
         flex-direction: column;
         text-align: center;
+        padding: 10px 0;
     }
 
-    nav .right-side {
+
+    .auth-nav {
         margin-top: 10px;
         width: 100%;
+        width: 100%;
+    }
+
+    footer {
+        margin-top: 30 px;
+        width: 100%;
+        text-align: center;
     }
 }
 
