@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     </head>
 <body class="auth-body">
-
+<!-- Login Page for To-Do Tracker Application -->
     <header>
         <div class="logo-header">
             <div style="display: flex; align-items: center;">
@@ -19,7 +19,7 @@
             </nav>
         </div>
     </header>
-
+<!-- Login Form Container -->
     <div class="content-wrapper">
         <div class="centered-auth-container">
             <h2>Welcome back!</h2>
@@ -46,6 +46,7 @@
     </footer>
 
     <script>
+        // JavaScript to handle login form submission
         const API_URL = '/api/auth/login';
         const loginForm = document.getElementById('loginForm');
 
@@ -56,24 +57,25 @@
             const password = document.getElementById('password').value;
 
             try {
-                // 1. Send Login Request
+                //Send Login Request
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-
+                //Parse JSON Response
                 const data = await response.json();
 
                 if (response.ok) {
-                    // 2. SUCCESS: Save the Token!
+                    // Save the Token and User Info
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-
+                    // Notify User of Successful Login
                     alert('Login Successful!');
                     
-                    // 3. Redirect to the main app
+                    //Redirect to the main app
                     window.location.href = 'index.html';
+                    // If login fails, show error message
                 } else {
                     alert('Error: ' + data.message);
                 }

@@ -1,10 +1,7 @@
-// ==========================================
-// GLOBAL CONFIGURATION & HELPER FUNCTIONS
-// ==========================================
-
+//Task Management Application Script
 const API_URL = '/api/tasks';
 
-// Function to add a new subject (Called by the HTML button)
+// Function to add a new subject
 function addSubject() {
     const subject = prompt("Please enter the subject name:");
     if (subject && subject.trim() !== "") {
@@ -12,7 +9,7 @@ function addSubject() {
     }
 }
 
-// Helper to add subject to both dropdowns if it doesn't exist
+//Helper to add subject to both dropdowns if it doesn't exist
 function addSubjectToDropdowns(subject) {
     const mainDropdown = document.getElementById("subjectDropdown");
     const formDropdown = document.getElementById("taskSubjectDropdown");
@@ -22,13 +19,14 @@ function addSubjectToDropdowns(subject) {
     for (let i = 0; i < mainDropdown.options.length; i++) {
         if (mainDropdown.options[i].value === subject) exists = true;
     }
-
+// If not exists, add to both dropdowns
+//If exists, do nothing
     if (!exists) {
         const mainOption = document.createElement("option");
         mainOption.text = subject;
         mainOption.value = subject;
         mainDropdown.add(mainOption);
-        
+        // Also add to form dropdown
         const formOption = document.createElement("option");
         formOption.text = subject;
         formOption.value = subject;
@@ -36,16 +34,12 @@ function addSubjectToDropdowns(subject) {
     }
 }
 
-// ==========================================
-// MAIN APPLICATION LOGIC
-// ==========================================
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- 1. AUTHENTICATION CHECK ---
+    // Authentication Check
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-
+// UI Elements for Auth State
     const loggedOutLinks = document.getElementById('loggedOutLinks');
     const loggedInLinks = document.getElementById('loggedInLinks');
     const userGreeting = document.getElementById('userGreeting');
@@ -74,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 2. DOM ELEMENTS ---
+    //DOM Elements for Task Management
     const taskModal = document.getElementById("taskModal");
     const openTaskModalBtn = document.getElementById("openTaskModalBtn");
     const closeBtn = document.querySelector(".close-btn");
@@ -88,9 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteSubjectBtn = document.getElementById("deleteSubjectBtn");
 
     // State to track editing
-    let currentTaskId = null; // We now use the MongoDB _id
+    let currentTaskId = null;
 
-    // --- 3. API FUNCTIONS (The Bridge to Backend) ---
+    //API Interaction Logic
 
     // Fetch all tasks from MongoDB
     async function fetchTasks() {
@@ -102,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Clear current list
             taskListContainer.innerHTML = '';
-            
+            // If tasks exist, render them
             if (tasks.length > 0) {
                 noTasksMessage.style.display = 'none';
                 tasks.forEach(task => {
@@ -110,9 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Ensure subject exists in dropdowns so we can filter by it
                     addSubjectToDropdowns(task.subject);
                 });
+                // Trigger filtering to respect current selection
             } else {
                 noTasksMessage.style.display = 'block';
             }
+            //If error occurs, show alert
         } catch (err) {
             console.error("Error fetching tasks:", err);
             alert("Could not load tasks.");
@@ -128,9 +124,10 @@ document.addEventListener("DOMContentLoaded", () => {
         taskCard.dataset.id = task._id; // MongoDB ID
         taskCard.dataset.subject = task.subject;
         taskCard.dataset.taskName = task.taskName;
-        taskCard.dataset.dueDate = task.dueDate ? task.dueDate.split('T')[0] : ''; // Format date
+        taskCard.dataset.dueDate = task.dueDate ? task.dueDate.split('T')[0] : '';
         taskCard.dataset.description = task.description;
 
+        // Inner HTML structure
         taskCard.innerHTML = `
             <h4>${task.taskName}</h4>
             <div class="task-meta">
@@ -152,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         taskListContainer.appendChild(taskCard);
     }
 
-    // --- 4. UI INTERACTION LOGIC ---
+    //user Interface Logic
 
     // Initial Load
     fetchTasks();
@@ -161,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function openModal() {
         taskModal.style.display = "block";
     }
-
+// Close and reset modal
     function closeModal() {
         taskModal.style.display = "none";
         taskForm.reset();
@@ -169,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('#taskModal h3').textContent = "Add a New Task";
         document.querySelector('#taskForm button[type="submit"]').textContent = "Submit Task";
     }
-
+// Event Listeners
     if(openTaskModalBtn) openTaskModalBtn.addEventListener('click', openModal);
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target == taskModal) closeModal(); });
@@ -209,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 dueDate: document.getElementById("taskDueDateInput").value,
                 description: document.getElementById("taskDescriptionInput").value
             };
-
+// Determine if creating new or updating existing
             try {
                 let response;
                 
@@ -234,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         body: JSON.stringify(taskData)
                     });
                 }
-
+// Handle response
                 if (response.ok) {
                     closeModal();
                     fetchTasks(); // Refresh list from DB
@@ -242,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const errData = await response.json();
                     alert(`Error: ${errData.message}`);
                 }
-
+//If error occurs, log it
             } catch (err) {
                 console.error("Error saving task:", err);
             }
@@ -257,9 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please click on a task to select it first.");
                 return;
             }
-
+// Get task ID from dataset
             const taskId = selectedCard.dataset.id;
-
+// Confirm deletion and send DELETE request
             if(confirm("Are you sure you want to delete this task?")) {
                 try {
                     const res = await fetch(`${API_URL}/${taskId}`, {
@@ -282,16 +279,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Delete Subject Logic (Frontend only for now as Subjects aren't a separate DB model)
+    // Delete Subject Logic : Frontend only for now as Subjects aren't a separate DB model - Possible update for Part 3
     if(deleteSubjectBtn) {
         deleteSubjectBtn.addEventListener('click', () => {
             const selectedValue = mainSubjectDropdown.value;
             if (!selectedValue) return alert("Select a subject to delete.");
-
+// Confirm deletion
             if (confirm(`Delete subject "${selectedValue}"?`)) {
                 const mainOp = mainSubjectDropdown.querySelector(`option[value="${selectedValue}"]`);
                 if(mainOp) mainOp.remove();
-                
+                // Also remove from form dropdown
                 const formOp = formSubjectDropdown.querySelector(`option[value="${selectedValue}"]`);
                 if(formOp) formOp.remove();
                 
@@ -307,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const selectedSubject = mainSubjectDropdown.value;
             const allTasks = document.querySelectorAll('.task-card');
             let tasksFound = 0;
-
+// Show/hide tasks based on selected subject
             allTasks.forEach(task => {
                 if (selectedSubject === "" || task.dataset.subject === selectedSubject) {
                     task.style.display = "block";
@@ -316,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     task.style.display = "none";
                 }
             });
-
+// Show message if no tasks found
             if (tasksFound > 0) {
                 noTasksMessage.style.display = "none";
             } else {

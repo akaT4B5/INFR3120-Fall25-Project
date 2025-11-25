@@ -4,22 +4,22 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// REGISTER ROUTE
+// Register
 router.post('/register', async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
 
-        // 1. Check if user already exists
+        //Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
 
-        // 2. Encrypt the password
+        //Encrypt the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // 3. Create and Save the new User
+        //Create and Save the new User
         const newUser = new User({
             fullName,
             email,
@@ -35,24 +35,24 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// LOGIN ROUTE
+// Login
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // 1. Check if user exists
+        //Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        // 2. Check if password matches
+        //Check if password matches
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        // 3. Generate Token (The "ID Card")
+        //generate token (ID)
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.json({
@@ -63,10 +63,10 @@ router.post('/login', async (req, res) => {
                 email: user.email
             }
         });
-
+// If any error occurs, catch and return server error
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
-
+// Export the router
 module.exports = router;

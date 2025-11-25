@@ -1,9 +1,10 @@
+
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/authMiddleware');
 const Task = require('../models/Task.js');
 
-// GET tasks
+// Obtain tasks for the logged-in user
 router.get('/', auth, async (req, res) => {
     try {
         const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
@@ -14,7 +15,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// POST task
+// Task creation
 router.post('/', auth, async (req, res) => {
     try {
         const { subject, taskName, dueDate, description } = req.body;
@@ -29,7 +30,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-// PUT task
+// Task update
 router.put('/:id', auth, async (req, res) => {
     try {
         let task = await Task.findById(req.params.id);
@@ -43,7 +44,7 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-// DELETE task
+//Task deletion
 router.delete('/:id', auth, async (req, res) => {
     try {
         let task = await Task.findById(req.params.id);

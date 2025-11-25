@@ -5,7 +5,7 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* --- Global Layout/Header Styles (Used by all pages) --- */
+/* Global Layout/Header Styles (Used by all pages)*/
 header {
     background-color: #348A60;
     border-bottom: 2px solid #1D4A33;
@@ -30,7 +30,7 @@ header {
     color: white;
 }
 
-/* Navigation Buttons (for index/login/register headers) */
+/* Navigation Buttons*/
 .auth-nav {
     display: flex;
     align-items: center;
@@ -70,7 +70,7 @@ header {
     margin-right: 10px;
 }
 
-/* --- Index.html Specific Styles (Main App) --- */
+/* Main Page styles */
 
 .container {
     display: flex;
@@ -144,7 +144,7 @@ footer {
     border-top: .5px solid #1D4A33;
 }
 
-/* --- Modal Styles --- */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -273,9 +273,8 @@ footer {
     transform: scale(1.01);
 }
 
-/* --- Auth Page Centering Styles (New) --- */
 
-/* Body style for Auth pages: centers content vertically/horizontally */
+/* Body style for Auth pages */
 .auth-body {
     display: flex;
     flex-direction: column;
@@ -287,14 +286,14 @@ footer {
 
 /* Wrapper to center the content below the full-width header */
 .content-wrapper {
-    flex-grow: 1; /* Makes wrapper fill remaining vertical space */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center;
     padding: 20px 0;
 }
 
-/* Auth Container (The centralized, rounded box) */
+/* Auth Container */
 .centered-auth-container {
     background-color: white;
     padding: 40px 60px;
@@ -313,7 +312,7 @@ footer {
     font-weight: bold;
 }
 
-/* Form Group overrides for the centralized look */
+/* Form Group overrides */
 .form-group {
     margin-bottom: 20px;
 }
@@ -348,7 +347,7 @@ footer {
     text-decoration: underline;
 }
 
-/* Footer positioning for Auth pages (overrides standard footer placement) */
+/* Footer positioning for Auth pages*/
 .auth-body footer {
     width: 100%;
     padding: 5px;

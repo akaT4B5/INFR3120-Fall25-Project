@@ -1,5 +1,7 @@
+//This file defines the User model for MongoDB using Mongoose
 const mongoose = require('mongoose');
 
+// Define the User schema
 const UserSchema = new mongoose.Schema({
     fullName: {
         type: String,
@@ -15,5 +17,5 @@ const UserSchema = new mongoose.Schema({
         required: true
     }
 }, { timestamps: true });
-
+// Export the User model
 module.exports = mongoose.model('User', UserSchema);

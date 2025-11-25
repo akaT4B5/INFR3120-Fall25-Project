@@ -1,3 +1,7 @@
+<!--This is the main HTML file for the To-Do Tracker application.
+    It includes the structure for the header, sidebar, main content area, and footer.
+    The file also contains a modal for adding new tasks.-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +10,7 @@
     <title>To-Do Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
+<!-- Body starts here -->
 <body>
     <div class="container">
 <header>
@@ -15,13 +19,13 @@
             <img src="image.png" alt="Logo" class="logo" />
             <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
         </div>
-        
+        <!-- Navigation Links -->
         <nav class="auth-nav">
             <div id="loggedOutLinks">
                 <a href="login.html" class="nav-btn">Login</a>
                 <a href="register.html" class="nav-btn">Register</a>
             </div>
-
+<!-- Logged-in user links -->
             <div id="loggedInLinks" style="display: none;">
                 <span id="userGreeting"></span>
                 <button id="logoutBtn" class="nav-btn logout">Logout</button>
@@ -72,7 +76,7 @@
             <h3>Add a New Task</h3>
 
             <form id="taskForm">
-
+<!-- Task Form Fields -->
                 <label for="taskSubjectDropdown">Subject:</label>
                 <select id="taskSubjectDropdown" required>
                     <option value="">Select a subject...</option>
