@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - To-Do Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body class="auth-body">
+<!-- Registration Page for To-Do Tracker Application -->
+    <header>
+        <div class="logo-header">
+            <div style="display: flex; align-items: center;">
+                <img src="image.png" alt="Logo" class="logo" />
+                <div class="header-text">To-Do Tracker — Making simple tasks simpler.</div>
+            </div>
+            <nav class="auth-nav">
+                 <a href="login.html" class="nav-btn">Login</a>
+            </nav>
+        </div>
+    </header>
+<!-- Registration Form Container -->
+    <div class="content-wrapper">
+        <div class="centered-auth-container">
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-auth">Register</button>
+            </form>
+            <!-- Link to Login Page -->
+            <p class="footer-link">
+                Already have an account? <a href="login.html">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Tabitha, Affan, Ghayas</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle registration form submission
+        const API_URL = '/api/auth/register'; 
+        const registerForm = document.getElementById('registerForm');
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+//Send Registration Request
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, email, password })
+                });
+//Parse JSON Response
+                const data = await response.json();
+//If registration is successful, notify user and redirect to login
+                if (response.ok) {
+                    alert('Registration Successful! Taking you to login...');
+                    window.location.href = 'login.html';
+                    // If registration fails, show error message
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Server error. Is your backend running?');
+            }
+        });
+    </script>
+</body>
+</html>
