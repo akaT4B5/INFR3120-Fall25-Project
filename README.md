@@ -13,18 +13,19 @@ INFR3120 Project Part 2
 Date: Nov 23/24 
 Tabitha Hannas
 
+**Progress Made**
 Implemented full user registration and login functionality using MongoDB/Mongoose for user storage and JWT (JSON Web Tokens) for session management.
 Ensured all data modification routes (Add, Edit, Delete Task/Subject) are protected via backend middleware that verifies the user's token before allowing database access.
 Refactored navigation across all pages (index.html, login.html, register.html) to dynamically display Logout (when signed in) or Login/Register links (when signed out).
 Successfully configured the application for hosting on a cloud service (Render), ensuring the server serves both the API routes and the static HTML/CSS/JS frontend files.
 
-Issues encountered and troubleshooting
+**Issues encountered and troubleshooting**
 Corrected file casing inconsistency for models (task to Task.js) to prevent server crashes and deployment failures.
 Debugged and corrected the 404 Not Found error by configuring server.js to correctly link the Frontend API calls (/api/tasks) to the Backend Express routes.
 Addressed issues where the website failed to load by unifying the file structure (public folder) and ensuring the Node server properly served the static HTML files.
 Debugged and resolved the recurring "Token is not valid" error by confirming the consistency of the JWT_SECRET environment variable on the production server.
 
-Citations for code errors and JWT authentication
+**Citations for code issues**
 https://www.youtube.com/watch?v=5fb2aPlgoys 
 https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener 
 https://www.freecodecamp.org/news/the-javascript-dom-manipulation-handbook/ 
@@ -33,5 +34,7 @@ https://expressjs.com/en/guide/using-middleware.html
 https://expressjs.com/en/starter/static-files.html 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS 
 https://blog.logrocket.com/password-hashing-node-js-bcrypt/
+https://code.visualstudio.com/docs/azure/mongodb
+https://stackoverflow.com/questions/76248890/cannot-connect-to-mongodb-shell-in-vscode
 
 
