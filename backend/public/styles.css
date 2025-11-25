@@ -404,7 +404,10 @@ footer {
     header .logo-header {
         flex-direction: column;
         text-align: center;
-        padding: 10px 0;
+        align-items: center;
+        display: flex;
+        padding: 15px 0;
+        gap: 10px;
     }
 
 
