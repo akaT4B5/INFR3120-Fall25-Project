@@ -424,6 +424,17 @@ footer {
         gap: 8px;
     }
 
+    #loggedInLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #logoutBtn {
+        width: 18px;
+        padding: 8px;
+    }
+
 
     .auth-nav {
         margin-top: 10px;
