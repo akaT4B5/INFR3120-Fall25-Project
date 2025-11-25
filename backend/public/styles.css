@@ -9,7 +9,7 @@ body, html {
 header {
     background-color: #348A60;
     border-bottom: 2px solid #1D4A33;
-    width: 100%; /* Ensure header spans full width on auth pages */
+    width: 100%;
 }
 
 .logo-header {
@@ -27,7 +27,7 @@ header {
     flex-grow: 1;
     text-align: center;
     margin-left: 20px;
-    color: white; /* Added color for consistency on auth pages */
+    color: white;
 }
 
 /* Navigation Buttons (for index/login/register headers) */
@@ -273,50 +273,25 @@ footer {
     transform: scale(1.01);
 }
 
-/* --- Auth Page Centering Styles (Moved from HTML) --- */
-.auth-body {
-    min-height: 100vh;
-    background-color: #E8FFF7;
-    display: flex;
-    flex-direction: column; 
-}
-.auth-container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #1D4A33;
-    margin: 50px auto; 
-}
-.btn-auth {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #53A677;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.btn-auth:hover {
-    background-color: #348A60;
-}
+/* --- Auth Page Centering Styles (New) --- */
 
-/* --- New Auth Page Styling (Moved from HTML) --- */
-
-/* Base body style for Auth pages: centers content vertically/horizontally */
+/* Body style for Auth pages: centers content vertically/horizontally */
 .auth-body {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
     min-height: 100vh;
     background-color: #E8FFF7;
     margin: 0;
     padding: 0;
+}
+
+/* Wrapper to center the content below the full-width header */
+.content-wrapper {
+    flex-grow: 1; /* Makes wrapper fill remaining vertical space */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 20px 0;
 }
 
 /* Auth Container (The centralized, rounded box) */
@@ -353,7 +328,6 @@ footer {
 
 /* Footer Link and Button Styles */
 .btn-auth {
-    width: 100%;
     padding: 12px 20px;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -376,7 +350,6 @@ footer {
 
 /* Footer positioning for Auth pages (overrides standard footer placement) */
 .auth-body footer {
-    margin-top: auto; 
     width: 100%;
     padding: 5px;
     background-color: #348A60;
