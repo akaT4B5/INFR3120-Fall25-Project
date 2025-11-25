@@ -361,59 +361,41 @@ footer {
 @media (max-width: 768px) {
 
     /* Make the layout vertical instead of side-by-side */
-    .container,
-    main {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    /* Sidebar fixes */
-    .sidebar {
-        width: 90%;           /* Moves inward */
-        margin: 0 auto;       /* Centers it */
-        padding: 10px;
-    }
-
-    /* Make buttons full width and stack */
-    .sidebar button,
-    .button-group button,
-    .full-width-button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    /* Stack button groups */
-    .button-group {
+    .container{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
     }
 
-    /* Subject box full width */
-    .sidebar textarea,
-    .sidebar select,
-    .dropdown {
+    /* Left Controls bar */
+    .controls {
+        width: 90%;    
+        margin: 20px;       
+    }
+
+    /* Make buttons one by one in a column */
+    .contorls button,
+    .controls select {
         width: 100%;
+        margin: 10px;
+        display: block;
     }
 
-    /* Adjust content area */
-    .content {
+    /* task container comes here */
+    .task-container {
         width: 95%;
         margin-top: 20px;
     }
 
-    /* Reduce navbar spacing */
-    nav {
-        flex-wrap: wrap;
-        padding: 10px;
+    /* top header so it doesnt overflow */
+    header, nav {
+        flex-direction: column;
+        text-align: center;
     }
 
     nav .right-side {
         margin-top: 10px;
         width: 100%;
-        text-align: right;
     }
-
 }
 
