@@ -32,5 +32,6 @@ https://www.youtube.com/watch?v=mbsmsi7l3r4
 https://expressjs.com/en/guide/using-middleware.html 
 https://expressjs.com/en/starter/static-files.html 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS 
+https://blog.logrocket.com/password-hashing-node-js-bcrypt/
 
 
