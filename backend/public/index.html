@@ -27,7 +27,8 @@
             </div>
 <!-- Logged-in user links -->
             <div id="loggedInLinks" style="display: none;">
-                <img id="navProfilePic" class="nav-profile-pic" src="default.png" alt="Profile">
+                <img id="navProfilePic" class="nav-profile-pic" src="default.png" alt="Profile" style="cursor: pointer;">
+                <input type="file" id="profileUploadInput" accept="image/*" style="display: none;">
                 <span id="userGreeting"></span>
                 <button id="logoutBtn" class="nav-btn logout">Logout</button>
             </div>
@@ -94,6 +95,22 @@
 
                 <button type="submit">Submit Task</button>
 
+            </form>
+        </div>
+    </div>
+
+<!-- Profile Picture Upload Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-profile">&times;</span>
+
+            <h3>Update Profile Picture</h3>
+
+            <form id="profileForm">
+                <label>Select new profile picture:</label>
+                <input type="file" id="profileImageInput" accept="image/*" required>
+
+                <button type="submit">Upload</button>
             </form>
         </div>
     </div>

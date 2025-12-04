@@ -72,5 +72,32 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Upload Profile Image
+router.post('/upload-profile', upload.single("profile"), async (req, res) => {
+    try {
+        const userId = req.body.id;
+
+        if (!req.file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        user.profileImage = req.file.filename;
+        await user.save();
+
+        res.json({
+            message: "Profile image updated",
+            profileImage: req.file.filename
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+
 // Export the router
 module.exports = router;
