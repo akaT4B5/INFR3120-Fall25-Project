@@ -28,6 +28,8 @@ header {
     text-align: center;
     margin-left: 20px;
     color: white;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Navigation Buttons*/
@@ -361,6 +363,7 @@ footer {
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    pointer-events: auto;
     z-index: 9999;
     position: relative;
 }
