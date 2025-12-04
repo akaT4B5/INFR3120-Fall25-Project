@@ -356,6 +356,14 @@ footer {
     border-top: .5px solid #1D4A33;
 }
 
+.nav-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
 
 /* ====== MOBILE FIX ====== */
 @media (max-width: 768px) 

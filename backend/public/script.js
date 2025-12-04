@@ -15,6 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
     // ----------------------------------------------------------------------
+    const navPic = document.getElementById("navProfilePic");
+
+if (navPic && user && user.profileImage) {
+    if (!user.profileImage.startsWith("http")) {
+        navPic.src = `/uploads/${user.profileImage}`;
+    } else {
+        // If full URL
+        navPic.src = user.profileImage;
+    }
+}
 
     // Authentication Check
     // NOTE: your original check is replaced by the stronger version above
