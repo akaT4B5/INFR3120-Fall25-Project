@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    profileImage: {
+        type: String,
+        default: "default.png"
     }
 }, { timestamps: true });
 // Export the User model

@@ -23,7 +23,8 @@ router.post('/register', async (req, res) => {
         const newUser = new User({
             fullName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            profileImage: "default.png" // <-- ADDED, comment stays correct
         });
 
         await newUser.save();
@@ -60,13 +61,16 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user._id,
                 fullName: user.fullName,
-                email: user.email
+                email: user.email,
+                profileImage: user.profileImage || "default.png" // <-- ADDED, comment preserved above
             }
         });
-// If any error occurs, catch and return server error
+
     } catch (err) {
+        // If any error occurs, catch and return server error
         res.status(500).json({ error: err.message });
     }
 });
+
 // Export the router
 module.exports = router;
