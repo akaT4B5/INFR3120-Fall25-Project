@@ -26,50 +26,6 @@ if (navPic && user && user.profileImage) {
     }
 }
 
-// Handle clicking the profile picture
-const profileUploadInput = document.getElementById("profileUploadInput");
-
-if (navPic && profileUploadInput) {
-    navPic.addEventListener("click", () => {
-        profileUploadInput.click(); // open hidden file input
-    });
-
-    profileUploadInput.addEventListener("change", async () => {
-        const file = profileUploadInput.files[0];
-        if (!file) return;
-
-        const formData = new FormData();
-        formData.append("profileImage", file);
-
-        try {
-            const response = await fetch("/api/auth/upload-profile", {
-                method: "POST",
-                headers: { "x-auth-token": token },
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Update UI
-                navPic.src = `/uploads/${data.filename}`;
-
-                // Update saved user
-                user.profileImage = data.filename;
-                localStorage.setItem("user", JSON.stringify(user));
-
-                alert("Profile picture updated!");
-            } else {
-                alert("Error: " + data.message);
-            }
-
-        } catch (err) {
-            console.error("Upload error:", err);
-            alert("Failed to upload image.");
-        }
-    });
-}
-
 // Authentication Check
     // NOTE: your original check is replaced by the stronger version above
     // but comments are kept here unchanged
@@ -373,6 +329,74 @@ if (navPic && profileUploadInput) {
         });
     }
 
+    // Profile Picture Upload Logic
+const profileModal = document.getElementById("profileModal");
+const closeProfile = document.querySelector(".close-profile");
+const profileForm = document.getElementById("profileForm");
+const fileInput = document.getElementById("profileImageInput");
+
+// Open modal when clicking profile picture
+if (navPic) {
+    navPic.addEventListener("click", () => {
+        profileModal.style.display = "block";
+    });
+}
+
+// Close modal
+if (closeProfile) {
+    closeProfile.addEventListener("click", () => {
+        profileModal.style.display = "none";
+    });
+}
+
+// Close modal by clicking outside
+window.addEventListener("click", (e) => {
+    if (e.target === profileModal) {
+        profileModal.style.display = "none";
+    }
+});
+
+// Upload new profile picture
+if (profileForm) {
+    profileForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = localStorage.getItem("token");
+        const file = fileInput.files[0];
+
+        if (!file) return alert("Please select an image.");
+
+        const formData = new FormData();
+        formData.append("profile", file);
+        formData.append("id", user.id);
+
+        try {
+            const response = await fetch("/api/auth/upload-profile", {
+                method: "POST",
+                headers: { "x-auth-token": token },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                navPic.src = `/uploads/${data.profileImage}`;
+                user.profileImage = data.profileImage;
+                localStorage.setItem("user", JSON.stringify(user));
+
+                alert("Profile updated!");
+                profileModal.style.display = "none";
+            } else {
+                alert("Error: " + data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Upload failed.");
+        }
+    });
+}
+
 });
 
 // ------------------------------------------------------------------
@@ -410,78 +434,3 @@ function addSubjectToDropdowns(subject) {
         formDropdown.add(formOption);
     }
 }
-
-// Profile Picture Upload Logi
-
-document.addEventListener("DOMContentLoaded", () => {
-    const profileModal = document.getElementById("profileModal");
-    const closeProfile = document.querySelector(".close-profile");
-    const navPic = document.getElementById("navProfilePic");
-    const profileForm = document.getElementById("profileForm");
-    const fileInput = document.getElementById("profileImageInput");
-
-    // Open modal when clicking profile picture
-    if (navPic) {
-        navPic.addEventListener("click", () => {
-            profileModal.style.display = "block";
-        });
-    }
-
-    // Close modal
-    if (closeProfile) {
-        closeProfile.addEventListener("click", () => {
-            profileModal.style.display = "none";
-        });
-    }
-
-    // Close modal by clicking outside
-    window.addEventListener("click", (e) => {
-        if (e.target === profileModal) {
-            profileModal.style.display = "none";
-        }
-    });
-
-    // Upload new profile picture
-    if (profileForm) {
-        profileForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const user = JSON.parse(localStorage.getItem("user"));
-            const token = localStorage.getItem("token");
-            const file = fileInput.files[0];
-
-            if (!file) return alert("Please select an image.");
-
-            const formData = new FormData();
-            formData.append("profile", file);
-            formData.append("id", user.id);
-
-            try {
-                const response = await fetch("/api/auth/upload-profile", {
-                    method: "POST",
-                    headers: { "x-auth-token": token },
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Update navbar image immediately
-                    navPic.src = `/uploads/${data.profileImage}`;
-
-                    // Update localStorage
-                    user.profileImage = data.profileImage;
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    alert("Profile updated!");
-                    profileModal.style.display = "none";
-                } else {
-                    alert("Error: " + data.message);
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Upload failed.");
-            }
-        });
-    }
-});
