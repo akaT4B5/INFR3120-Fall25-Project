@@ -329,7 +329,7 @@ if (navPic && user && user.profileImage) {
         });
     }
 
-    // Profile Picture Upload Logic
+// Profile Picture Upload Logic
 const profileModal = document.getElementById("profileModal");
 const closeProfile = document.querySelector(".close-profile");
 const profileForm = document.getElementById("profileForm");
@@ -381,7 +381,7 @@ if (profileForm) {
             const data = await response.json();
 
             if (response.ok) {
-                navPic.src = `/${data.profileImage}`;
+                navPic.src = `/uploads/${data.profileImage}`;
                 user.profileImage = data.profileImage;
                 localStorage.setItem("user", JSON.stringify(user));
 

@@ -368,21 +368,16 @@ footer {
     position: relative;
 }
 
-#logoutBtn {
-    position: relative !important;
-    z-index: 999999 !important;
-    pointer-events: auto !important;
+.profile-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
-#loggedInLinks {
-    position: relative !important;
-    z-index: 999998 !important;
-}
-
-#navProfilePic {
-    position: relative !important;
-    z-index: 1000000 !important;
-    pointer-events: auto !important;
+.profile-btn:hover img {
+    opacity: 0.8;
+    transition: 0.2s;
 }
 
 
