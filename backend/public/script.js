@@ -381,7 +381,7 @@ if (profileForm) {
             const data = await response.json();
 
             if (response.ok) {
-                navPic.src = `/uploads/${data.profileImage}`;
+                navPic.src = `/${data.profileImage}`;
                 user.profileImage = data.profileImage;
                 localStorage.setItem("user", JSON.stringify(user));
 
