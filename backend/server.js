@@ -27,8 +27,8 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static frontend files
-app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
 const uri = process.env.MONGO_URI; 
