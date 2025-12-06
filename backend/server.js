@@ -43,7 +43,7 @@ mongoose.connect(uri)
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
-app.use('/api/auth', oauthRoutes);
+app.use('/api/oauths2', oauthRoutes);
 
 // Start Server
 app.listen(PORT, () => {
