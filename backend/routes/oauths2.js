@@ -12,7 +12,7 @@ router.get(
     passport.authenticate("github", { failureRedirect: "/login.html" }),
     (req, res) => {
         const token = req.user.token;
-        res.redirect(`/login.html?token=${token}`);
+        res.redirect(`/login.html?token=${req.user.token}`);
     }
 );
 
@@ -26,7 +26,7 @@ router.get(
     passport.authenticate("discord", { failureRedirect: "/login.html" }),
     (req, res) => {
         const token = req.user.token;
-        res.redirect(`/login.html?token=${token}`);
+        res.redirect(`/login.html?token=${req.user.token}`);
     }
 );
 
@@ -40,7 +40,7 @@ router.get(
     passport.authenticate("google", { failureRedirect: "/login.html" }),
     (req, res) => {
         const token = req.user.token;
-        res.redirect(`/login.html?token=${token}`);
+        res.redirect(`/login.html?token=${req.user.token}`);
     }
 );
 
