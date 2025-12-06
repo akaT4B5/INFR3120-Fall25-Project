@@ -410,6 +410,40 @@ footer {
     background-color: #000000;
 }
 
+.oauth-btn.google {
+    background-color: #db4437;
+    color: white;
+}
+
+.oauth-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.oauth-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.discord-btn { background: #5865F2; }
+.discord-btn:hover { background: #4752C4; }
+
+.github-btn { background: #333; }
+.github-btn:hover { background: #222; }
+
+.google-btn { background: #DB4437; }
+.google-btn:hover { background: #B33A2E; }
+
 
 /* ====== MOBILE FIX ====== */
 @media (max-width: 768px) 
