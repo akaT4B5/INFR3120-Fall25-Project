@@ -98,6 +98,31 @@ router.post('/upload-profile', upload.single("profile"), async (req, res) => {
 });
 
 
+// --- GITHUB OAUTH LOGIN ---
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login.html" }),
+  (req, res) => {
+      // send back JWT + user data
+  }
+);
+
+// --- DISCORD OAUTH LOGIN ---
+router.get("/discord", passport.authenticate("discord"));
+
+router.get(
+  "/discord/callback",
+  passport.authenticate("discord", { failureRedirect: "/login.html" }),
+  (req, res) => {
+      // send back JWT + user data
+  }
+);
+
+module.exports = router;
+
+
 
 // Export the router
 module.exports = router;

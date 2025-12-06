@@ -18,8 +18,9 @@ const UserSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: "default.png"
-    }
+        default: "uploads/default.png"
+    },
+    discordId: { type: String }
 }, { timestamps: true });
 // Export the User model
 module.exports = mongoose.model('User', UserSchema);
