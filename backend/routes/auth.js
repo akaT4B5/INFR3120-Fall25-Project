@@ -3,28 +3,26 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const passport = require("passport");
+const upload = require("../middleware/upload");
 
-// Register
+// --------------------------- REGISTER ---------------------------
 router.post('/register', async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
 
-        //Check if user already exists
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        if (existingUser)
             return res.status(400).json({ message: "User already exists" });
-        }
 
-        //Encrypt the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        //Create and Save the new User
         const newUser = new User({
             fullName,
             email,
             password: hashedPassword,
-            profileImage: "default.png" // <-- ADDED, comment stays correct
+            profileImage: "default.png"
         });
 
         await newUser.save();
@@ -36,25 +34,20 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login
+// --------------------------- LOGIN ---------------------------
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        //Check if user exists
         const user = await User.findOne({ email });
-        if (!user) {
+        if (!user)
             return res.status(400).json({ message: "Invalid credentials" });
-        }
 
-        //Check if password matches
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        if (!isMatch)
             return res.status(400).json({ message: "Invalid credentials" });
-        }
 
-        //generate token (ID)
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         res.json({
             token,
@@ -62,27 +55,26 @@ router.post('/login', async (req, res) => {
                 id: user._id,
                 fullName: user.fullName,
                 email: user.email,
-                profileImage: user.profileImage || "default.png" // <-- ADDED, comment preserved above
+                profileImage: user.profileImage || "default.png"
             }
         });
 
     } catch (err) {
-        // If any error occurs, catch and return server error
         res.status(500).json({ error: err.message });
     }
 });
 
-// Upload Profile Image
+// --------------------------- UPLOAD PROFILE ---------------------------
 router.post('/upload-profile', upload.single("profile"), async (req, res) => {
     try {
-        const userId = req.body.id;
+        const { id } = req.body;
 
-        if (!req.file) {
+        if (!req.file)
             return res.status(400).json({ message: "No file uploaded" });
-        }
 
-        const user = await User.findById(userId);
-        if (!user) return res.status(404).json({ message: "User not found" });
+        const user = await User.findById(id);
+        if (!user)
+            return res.status(404).json({ message: "User not found" });
 
         user.profileImage = req.file.filename;
         await user.save();
@@ -97,32 +89,37 @@ router.post('/upload-profile', upload.single("profile"), async (req, res) => {
     }
 });
 
-
-// --- GITHUB OAUTH LOGIN ---
+// --------------------------- GITHUB OAUTH ---------------------------
 router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
 
-router.get(
-  "/github/callback",
-  passport.authenticate("github", { failureRedirect: "/login.html" }),
-  (req, res) => {
-      // send back JWT + user data
-  }
+router.get("/github/callback",
+    passport.authenticate("github", { failureRedirect: "/login.html" }),
+    (req, res) => {
+        const token = req.user.token;
+        res.redirect(`/login.html?token=${token}`);
+    }
 );
 
-// --- DISCORD OAUTH LOGIN ---
+// --------------------------- DISCORD OAUTH ---------------------------
 router.get("/discord", passport.authenticate("discord"));
 
-router.get(
-  "/discord/callback",
-  passport.authenticate("discord", { failureRedirect: "/login.html" }),
-  (req, res) => {
-      // send back JWT + user data
-  }
+router.get("/discord/callback",
+    passport.authenticate("discord", { failureRedirect: "/login.html" }),
+    (req, res) => {
+        const token = req.user.token;
+        res.redirect(`/login.html?token=${token}`);
+    }
 );
 
-module.exports = router;
+// --------------------------- GOOGLE OAUTH ---------------------------
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
+router.get("/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login.html" }),
+    (req, res) => {
+        const token = req.user.token;
+        res.redirect(`/login.html?token=${token}`);
+    }
+);
 
-
-// Export the router
 module.exports = router;

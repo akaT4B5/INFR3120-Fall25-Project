@@ -14,14 +14,17 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     profileImage: {
         type: String,
-        default: "uploads/default.png"
+        default: "default.png" 
     },
     discordId: { type: String },
-    githubId: { type: String }
+    githubId: { type: String },
+    googleId: { type: String }, 
+    authProvider: { type: String, default: "local" } 
 }, { timestamps: true });
+
 // Export the User model
 module.exports = mongoose.model('User', UserSchema);

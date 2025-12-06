@@ -4,13 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const passport = require("./passport");
 
 //Route files
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks'); 
-const discordRoutes = require("./routes/discord");
-const githubRoutes = require("./routes/github");
-
+const oauthRoutes = require("./routes/oauth");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,8 +42,7 @@ mongoose.connect(uri)
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes); 
-app.use("/api/auth/discord", discordRoutes);
-app.use("/api/auth/github", githubRoutes);
+app.use('/api/auth/oauth', oauthRoutes);
 
 // Start Server
 app.listen(PORT, () => {
