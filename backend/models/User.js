@@ -20,7 +20,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "uploads/default.png"
     },
-    discordId: { type: String }
+    discordId: { type: String },
+    githubId: { type: String }
 }, { timestamps: true });
 // Export the User model
 module.exports = mongoose.model('User', UserSchema);

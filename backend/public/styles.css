@@ -395,6 +395,20 @@ footer {
     background-color: #4752C4;
 }
 
+.github-login-btn {
+    display: block;
+    background-color: #24292f;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.github-login-btn:hover {
+    background-color: #000000;
+}
 
 
 /* ====== MOBILE FIX ====== */

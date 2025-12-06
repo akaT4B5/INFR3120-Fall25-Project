@@ -9,6 +9,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks'); 
 const discordRoutes = require("./routes/discord");
+const githubRoutes = require("./routes/github");
 
 
 const app = express();
@@ -42,6 +43,7 @@ mongoose.connect(uri)
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes); 
 app.use("/api/auth/discord", discordRoutes);
+app.use("/api/auth/github", githubRoutes);
 
 // Start Server
 app.listen(PORT, () => {
