@@ -380,6 +380,22 @@ footer {
     transition: 0.2s;
 }
 
+.discord-login-btn {
+    display: block;
+    background-color: #5865F2;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border-radius: 6px;
+    margin-top: 15px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.discord-login-btn:hover {
+    background-color: #4752C4;
+}
+
+
 
 /* ====== MOBILE FIX ====== */
 @media (max-width: 768px) 
