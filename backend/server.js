@@ -8,8 +8,9 @@ const passport = require("./passport");
 
 //Route files
 const authRoutes = require('./routes/auth');
-const taskRoutes = require('./routes/tasks'); 
-const oauthRoutes = require("./routes/oauth");
+const taskRoutes = require('./routes/tasks');
+const oauthRoutes = require('./routes/oauths2');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -41,8 +42,8 @@ mongoose.connect(uri)
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes); 
-app.use('/api/auth/oauth', oauthRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/auth', oauthRoutes);
 
 // Start Server
 app.listen(PORT, () => {
