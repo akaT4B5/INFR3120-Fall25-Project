@@ -109,20 +109,21 @@
                 alert('Server error. Is your backend running?');
             }
         });
-
-// ===== OAUTH LOGIN BUTTONS =====
-// Discord OAuth
-    document.getElementById("discordLogin").addEventListener("click", () => {
-        window.location.href ="https://discord.com/oauth2/authorize?client_id=1446672733667721256&response_type=code&redirect_uri=https%3A%2F%2Finf3120-fall25-project-ysd9.onrender.com%2Fapi%2Fauth%2Fdiscord%2Fcallback&scope=email+identify";
-    });
-// Google OAuth
-    document.getElementById("googleLogin").addEventListener("click", () => {
-        window.location.href ="https://accounts.google.com/o/oauth2/v2/auth?client_id=794842864582-unnv60tc009i89nrrv5f99s9b36tq60j.apps.googleusercontent.com&redirect_uri=https://inf3120-fall25-project-ysd9.onrender.com/api/auth/google/callback&response_type=code&scope=openid%20email%20profile";
-    });
-// GitHub OAuth
-    document.getElementById("githubLogin").addEventListener("click", () => {
-        window.location.href ="https://github.com/login/oauth/authorize?client_id=Ov23liL7oxUIaKiACacv&redirect_uri=https://inf3120-fall25-project-ysd9.onrender.com/api/auth/github/callback&scope=user:email";
-    });
     </script>
+    <div class="oauth-container">
+        <p class="oauth-label">Or log in with:</p>
+
+        <button class="oauth-btn discord-btn" id="discordLogin">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" class="icon">Continue with Discord
+        </button>
+
+        <button class="oauth-btn google-btn" id="googleLogin">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" class="icon">Continue with Google
+        </button>
+
+        <button class="oauth-btn github-btn" id="githubLogin">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" class="icon">Continue with GitHub
+        </button>
+    </div>
 </body>
 </html>

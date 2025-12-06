@@ -445,6 +445,64 @@ footer {
 .google-btn:hover { background: #B33A2E; }
 
 
+.oauth-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.oauth-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.oauth-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    gap: 10px;
+}
+
+.oauth-btn .icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Discord */
+.discord-btn {
+    background-color: #5865F2;
+    color: white;
+}
+.discord-btn:hover {
+    background-color: #4752C4;
+}
+
+/* Google */
+.google-btn {
+    background-color: #db4437;
+    color: white;
+}
+.google-btn:hover {
+    background-color: #b33629;
+}
+
+/* GitHub */
+.github-btn {
+    background-color: #24292f;
+    color: white;
+}
+.github-btn:hover {
+    background-color: #000000;
+}
+
+
 /* ====== MOBILE FIX ====== */
 @media (max-width: 768px) 
 /* everything here applies to only phones or tablets*/
